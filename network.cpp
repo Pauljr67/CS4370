@@ -64,41 +64,24 @@ Vertex::~Vertex() // destructor
   */
 }
 
-int Vertex::removeEdge(int endpt) // add an edge to vertex, return 1 if successful
+int Vertex::removeEdge(int endpt) // remove an edge to vertex, return 1 if successful
 {
-   // cout << "hi";
   if (endpt < 0) fatal("invalid endpoint for edge");
-  //if (wt < 0-TOL) fatal("invalid weight for edge");
 
   Edge *edgePtr; // pointer to move through linked list of edges
   Edge *prev;
   edgePtr = &firstEdge; // point to first edge
 
-//    cout << endpt;
   if(edgePtr->next == 0)
     return 1;
 
-//    cout << endpt;
   while (edgePtr->target != endpt && edgePtr != 0){ // follow until find last edge
-    //cout << endpt;
     prev = edgePtr;
     edgePtr = edgePtr->next; // pointer points at next edge in list
 }
   if(edgePtr == 0)
     return 1;
-//if(edgePtr == NULL)
-// fatal("grr");
   prev->next = edgePtr->next;
-
-  //Edge *newEdge; // newEdge created
-  //if((newEdge = new Edge) == NULL)
-  //  fatal("memory not allocated for edge");
-
-  
-  //edgePtr->next = newEdge; // add new edge to list
-  //newEdge->target = endpt; // assign properties to new edge
-  //newEdge->weight = wt;
-  //newEdge->next = 0; // mark new edge as last on list
 
   return 1;
 }
@@ -259,30 +242,16 @@ int Network::removeEdge(int v1, int v2) // return 1 if successfully add edge
     }
   }
 
-  //std::cout << "v1 = " << v1 << ", v2 = " << v2 << std::endl;
+  vertices[v1].removeEdge(v2); // remove edge
 
-  /*if(vertices[v1].haveEdge(v2)) { // edge already exist
-        //      if (weight > vertices[v1].getWeight(v2))
-        //  vertices[v1].changeWeight(v2, weight); // use highest weight for edge
-    return 0; // signal no new edge added
-  }*/
-
-  //cout << "test";
-  vertices[v1].removeEdge(v2); // add edge
-
-  //cout << "test";
-   // vertices[v2].removeEdge(v1);
   if(RETAINSYMMETRIC) { // retain both (i,j) and (j,i)
-   // if(vertices[v2].haveEdge(v1)) // edge already exists, return failure
-   //   return 0;
-   //cout << "test";
     vertices[v2].removeEdge(v1);
   }
 
   numEdges--; // update number of edges
   vertices[v1].degree--; // update degree of vertices
   if (!DIRECTED)
-    vertices[v2].degree--; // increase degree for both vertices if undirected
+    vertices[v2].degree--; // reduce degree for both vertices if undirected
 
   return 1;
 }

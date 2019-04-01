@@ -18,4 +18,4 @@ network.o:	network.cpp network.h
 		$(CC) $(CFLAGS) -c network.cpp
 
 clean:
-		/bin/rm -f *.o  test.txt bfs.txt $(TARGET)
+		/bin/rm -f *.o saveCompSizes.txt newGMLFile.gml bfs.txt $(TARGET)

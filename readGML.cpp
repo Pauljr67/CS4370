@@ -194,7 +194,7 @@ int main(int argc, char ** argv)
     
     else {
       numEdges++; // count number of edges
-      all_weights.push_back(weight);
+      all_weights.push_back(weight); //add weight to the vector of weights
     }
 
 	if(numEdges % 10000000 == 0) // message every 10 million edges
@@ -227,17 +227,17 @@ int main(int argc, char ** argv)
   //std::cout << "Highest edge weight recorded for duplicate edges" << std::endl;
 //sparseNet.removeEdge(0, 1);
 
-  for(int x = 0; x < all_weights.size(); x++)
+  for(int x = 0; x < all_weights.size(); x++) //add weights and get mean
     total_weight += all_weights[x];    
 
   mean = total_weight / numEdges;
 
-  for (int x = 0; x < all_weights.size(); x++)
+  for (int x = 0; x < all_weights.size(); x++)  //get standard deviation
     std_deviation += pow(all_weights[x] - mean, 2);
 
   std_deviation = sqrt(std_deviation / numEdges);
 
-  for(int i = 0; i<sparseNet.numVertices; i++){
+  for(int i = 0; i<sparseNet.numVertices; i++){ //loop to remove edges based on weight and standard deviation
 
     Edge* edgePtr1;
     edgePtr1 = &(sparseNet.vertices[i].firstEdge);
@@ -257,7 +257,7 @@ int main(int argc, char ** argv)
     }
   }
 
-  std::cout <<  mean << "   " << sqrt(std_deviation / numEdges) << "\n\n";
+ // std::cout <<  mean << "   " << sqrt(std_deviation / numEdges) << "\n\n";
 
 //Commented out a lot of the original code 
   //std::cout << numEdges << "\n";
@@ -265,17 +265,21 @@ int main(int argc, char ** argv)
 //std::cout << sparseNet.getEdgeWeight(9,10);
 //char temp[] = "test.txt";  
 //sparseNet.printEdges(temp);
-char grr[] = "bfs.txt"; //Text file to show the bfs
+
+
+char bfsFileName[] = "bfs.txt"; //Text file to show the bfs
 int useForClustering[sparseNet.numVertices];
-sparseNet.bfs(grr, useForClustering);
+sparseNet.bfs(bfsFileName, useForClustering);
 /*for(int i = 0; i < sparseNet.numVertices; i++) {
 
   std::cout << useForClustering[i];
 
 }*/
 
-char temp[] = "test.txt";  //file to show the clustering and the color assignment for all nodes along with weights and edges
-sparseNet.printEdges(temp, useForClustering);
+
+
+char gmlFileName[] = "newGMLFile.gml";  //file to show the clustering and the color assignment for all nodes along with weights and edges
+sparseNet.printEdges(gmlFileName, useForClustering);
 
   delete [] id;
   delete [] idInv;

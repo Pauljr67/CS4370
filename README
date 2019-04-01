@@ -1,0 +1,8 @@
+Authors: Justin Henn, Paul Reis, Zach Jorn
+Program: Clustering BFS Algorithm
+Date: 3/31/19
+
+This program is used for clustering gml graph files that have weighted edges and are in a non-Euclidean space. It first reads in the file and created a linked-list network. It then calculates the mean and standard deviation of the
+weights of the edges. It then uses the mean and standard deviation to remove any edge that is mroe than one standard deviation away from the mean. After that it uses BFS to cluster the data. First, the node with the most edges is
+found. It then starts the BFS loop with using that node first. After it has clustered every edge that is connected to that node, it will then check the rest of the nodes to cluster those as well. This is in case of disjoint
+networks and if there are singletons. The outside source used was the files provided by Professor Climer for creating the network and the BFS. 
